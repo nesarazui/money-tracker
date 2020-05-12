@@ -2,14 +2,63 @@
 
 const db = require('../server/db')
 const {User} = require('../server/db/models')
+const {Spendlog} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
+    User.create({
+      email: 'cody@email.com',
+      password: '123',
+      firstName: 'Cody',
+      lastName: 'Jones',
+      employed: 'True',
+      income: 100
+    }),
     User.create({email: 'murphy@email.com', password: '123'})
+  ])
+
+  const spendlog = await Promise.all([
+    Spendlog.create({
+      item: 'whole foods',
+      amount: 25,
+      category: 'food',
+      userId: 1
+    }),
+    Spendlog.create({item: 'coffee', amount: 5, category: 'drinks', userId: 1}),
+    Spendlog.create({
+      item: 'twilight',
+      amount: 15,
+      category: 'entertainment',
+      userId: 1
+    }),
+    Spendlog.create({
+      item: 'netflix',
+      amount: 15,
+      category: 'bills',
+      userId: 1
+    }),
+    Spendlog.create({
+      item: 'juniors cheesecake',
+      amount: 50,
+      category: 'food',
+      userId: 1
+    }),
+    Spendlog.create({item: 'tea', amount: 5, category: 'drinks', userId: 1}),
+    Spendlog.create({
+      item: 'cats',
+      amount: 100,
+      category: 'entertainment',
+      userId: 1
+    }),
+    Spendlog.create({
+      item: 'car insurance',
+      amount: 100,
+      category: 'bills',
+      userId: 1
+    })
   ])
 
   console.log(`seeded ${users.length} users`)
