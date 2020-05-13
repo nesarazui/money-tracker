@@ -1,5 +1,6 @@
 const User = require('./user')
 const Spendlog = require('./spendlog')
+const Category = require('./category')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -9,6 +10,7 @@ const Spendlog = require('./spendlog')
  */
 
 Spendlog.belongsTo(User)
+Spendlog.belongsTo(Category)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -18,5 +20,6 @@ Spendlog.belongsTo(User)
  */
 module.exports = {
   User,
-  Spendlog
+  Spendlog,
+  Category
 }

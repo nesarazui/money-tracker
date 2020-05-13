@@ -3,31 +3,39 @@ import {connect} from 'react-redux'
 import {fetchSpendLog} from '../store/spending'
 
 class SpendLog extends React.Component {
-  // componentDidMount () {
-  //     this.props.fetchSpendLog()
-  // }
+  componentDidMount() {
+    this.props.fetchSpendLog()
+  }
   render() {
     //console.log('HERE ARE ALL THE SPEND LOGS FOR CODY AFTER RENDER: ', this.props.spending)
-    // const userLogs = this.props.spending
-    return (
-      <div>
-        <b>View Full Log of Spending Here:</b>
-        {/* <div>
-                {
-                    userLogs.map( (log) => {
-                        return (
-                            <div key={log.id}>
-                                <div>Line Item: {log.item}</div>
-                                <div>Amount: {log.amount} </div>
-                                <div>Category: {log.category}</div>
-                                <div>Date: {log.date}</div>
-                            </div>
-                        )
-                    })
-                }
-                </div> */}
-      </div>
-    )
+    const userLogs = this.props.spending
+    console.log('***USERLOGS', userLogs)
+    if (userLogs.length > 0) {
+      return (
+        <div>
+          <b>View Full Log of Spending Here:</b>
+          <div>
+            {userLogs.map(log => {
+              return (
+                <div key={log.id}>
+                  <div>Line Item: {log.item}</div>
+                  <div>Amount: {log.amount} </div>
+                  <div>Category: {log.category.categoryType}</div>
+                  <div>Date: {log.date}</div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <b>View Full Log of Spending Here:</b>
+          <div>No Saved Logs</div>
+        </div>
+      )
+    }
   }
 }
 

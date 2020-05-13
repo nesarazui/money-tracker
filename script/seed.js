@@ -3,6 +3,7 @@
 const db = require('../server/db')
 const {User} = require('../server/db/models')
 const {Spendlog} = require('../server/db/models')
+const {Category} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -20,44 +21,59 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  const categories = await Promise.all([
+    Category.create({
+      categoryType: 'food'
+    }),
+    Category.create({
+      categoryType: 'drinks'
+    }),
+    Category.create({
+      categoryType: 'entertainment'
+    }),
+    Category.create({
+      categoryType: 'bills'
+    })
+  ])
+
   const spendlog = await Promise.all([
     Spendlog.create({
       item: 'whole foods',
       amount: 25,
-      category: 'food',
-      userId: 1
+      userId: 1,
+      categoryId: 1
     }),
-    Spendlog.create({item: 'coffee', amount: 5, category: 'drinks', userId: 1}),
+    Spendlog.create({item: 'coffee', amount: 5, userId: 1, categoryId: 2}),
     Spendlog.create({
       item: 'twilight',
       amount: 15,
-      category: 'entertainment',
-      userId: 1
+      userId: 1,
+      categoryId: 3
     }),
     Spendlog.create({
       item: 'netflix',
       amount: 15,
-      category: 'bills',
-      userId: 1
+      userId: 1,
+      categoryId: 4
     }),
     Spendlog.create({
       item: 'juniors cheesecake',
       amount: 50,
-      category: 'food',
-      userId: 1
+      userId: 1,
+      categoryId: 1
     }),
-    Spendlog.create({item: 'tea', amount: 5, category: 'drinks', userId: 1}),
+    Spendlog.create({item: 'tea', amount: 5, userId: 1, categoryId: 2}),
     Spendlog.create({
       item: 'cats',
       amount: 100,
-      category: 'entertainment',
-      userId: 1
+      userId: 1,
+      categoryId: 3
     }),
     Spendlog.create({
       item: 'car insurance',
       amount: 100,
-      category: 'bills',
-      userId: 1
+      userId: 1,
+      categoryId: 4
     })
   ])
 
