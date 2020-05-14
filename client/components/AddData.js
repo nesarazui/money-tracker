@@ -1,6 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addSpend, fetchSpendLog} from '../store/spending'
+import {
+  addSpend,
+  fetchSpendLog,
+  fetchCategories,
+  addingCategory
+} from '../store/spending'
 const moment = require('moment')
 
 class AddData extends React.Component {
@@ -10,10 +15,16 @@ class AddData extends React.Component {
       item: '',
       amount: 0,
       categoryId: 1,
+      newCategory: '',
       date: moment().format('YYYY-MM-DD')
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.addCategory = this.addCategory.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.fetchCategories()
   }
 
   handleChange(event) {
@@ -24,6 +35,13 @@ class AddData extends React.Component {
     event.preventDefault()
     await this.props.addSpend(this.state)
     await this.props.fetchSpendLog()
+  }
+
+  async addCategory(newCat) {
+    console.log('what is the newCat', newCat)
+    await this.props.addingCategory(newCat)
+    let id = this.props.categories[this.props.categories.length - 1].id
+    this.setState({categoryId: id})
   }
 
   render() {
@@ -56,11 +74,35 @@ class AddData extends React.Component {
             value={this.state.categoryId}
             onChange={this.handleChange}
           >
-            <option value="1">Food</option>
-            <option value="2">Drink</option>
-            <option value="3">Entertainment</option>
-            <option value="4">Bills</option>
+            {this.props.categories.map(catItem => {
+              return (
+                <option key={catItem.id} value={catItem.id}>
+                  {catItem.categoryType}
+                </option>
+              )
+            })}
+            <option value="0">Create New Category</option>
           </select>
+
+          {this.state.categoryId === '0' ? (
+            <div>
+              <label htmlFor="newCategory:">New Category:</label>
+              <input
+                name="newCategory"
+                type="text"
+                value={this.state.newCategory}
+                onChange={this.handleChange}
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  this.addCategory(this.state.newCategory)
+                }}
+              >
+                Update
+              </button>
+            </div>
+          ) : null}
 
           <label htmlFor="date:">Date: </label>
           <input
@@ -82,10 +124,19 @@ const mapDispatch = dispatch => {
     addSpend: newSpendObj => dispatch(addSpend(newSpendObj)),
     fetchSpendLog: () => {
       dispatch(fetchSpendLog())
-    }
+    },
+    fetchCategories: () => {
+      dispatch(fetchCategories())
+    },
+    addingCategory: newCat => dispatch(addingCategory(newCat))
   }
 }
 
-const connectedToAddData = connect(null, mapDispatch)(AddData)
+const mapState = state => {
+  return {
+    categories: state.spending.categories
+  }
+}
+const connectedToAddData = connect(mapState, mapDispatch)(AddData)
 
 export default connectedToAddData

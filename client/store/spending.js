@@ -4,9 +4,10 @@ import history from '../history'
 //ACTION TYPES
 const GET_SPENDING = 'GET_SPENDING'
 const ADD_SPENDING = 'ADD_SPENDING'
+const GET_CATEGORIES = 'GET_CATEGORIES'
 
 //INITIAL STATE
-const initialState = {spending: []}
+const initialState = {spending: [], categories: []}
 
 //ACTION CREATOR
 const getSpending = spending => {
@@ -20,6 +21,13 @@ const addSpending = newSpend => {
   return {
     type: ADD_SPENDING,
     newSpend
+  }
+}
+
+const getCategories = categories => {
+  return {
+    type: GET_CATEGORIES,
+    categories
   }
 }
 
@@ -47,11 +55,37 @@ export const addSpend = newSpendObj => {
   }
 }
 
+export const fetchCategories = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/categories/')
+      return dispatch(getCategories(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const addingCategory = newCat => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/categories/', {
+        categoryType: newCat
+      })
+      return dispatch(getCategories(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 //REDUCER
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_SPENDING:
       return {...state, spending: action.spending}
+    case GET_CATEGORIES:
+      return {...state, categories: action.categories}
     default:
       return state
   }
