@@ -55,6 +55,17 @@ export const addSpend = newSpendObj => {
   }
 }
 
+export const deleteSpendLog = id => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.delete(`/api/spending/${id}`)
+      return dispatch(getSpending(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 export const fetchCategories = () => {
   return async dispatch => {
     try {
@@ -72,6 +83,19 @@ export const addingCategory = newCat => {
       const {data} = await axios.post('/api/categories/', {
         categoryType: newCat
       })
+      return dispatch(getCategories(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const deleteCategory = id => {
+  console.log('IN THE THUNKS', id)
+  return async dispatch => {
+    try {
+      console.log('IN THE THUNK', id)
+      const {data} = await axios.delete(`/api/categories/${id}`)
       return dispatch(getCategories(data))
     } catch (error) {
       console.error(error)

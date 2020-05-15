@@ -28,3 +28,21 @@ router.post('/', async (req, res, next) => {
     next(error)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    console.log('HIT THE ROUTE, ID IS: ', id)
+    const catToDelete = await Category.findByPk(id)
+    console.log('FOUND ITEM TO DELETE: ', catToDelete)
+    if (catToDelete) {
+      await catToDelete.destroy()
+      const updatedCategories = await Category.findAll()
+      res.send(updatedCategories)
+    } else {
+      res.status(404).send('Could Not Delete Category')
+    }
+  } catch (error) {
+    next(error)
+  }
+})

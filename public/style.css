@@ -19,3 +19,21 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.container {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: lightgreen;
+  border-color: black;
+}
+
+.newLine {
+  padding-top: 20px;
+  /* margin: 5px; */
+}
+
+.headerText {
+  padding-bottom: 20px;
+  /* margin: 5px; */
+}

@@ -10,12 +10,14 @@ class Dashboard extends React.Component {
   render() {
     if (this.props.spending) {
       return (
-        <div>
-          <b>At A Glance:</b>
+        <div className="container">
+          <div className="headerText">
+            <b>At A Glance:</b>
+          </div>
 
           <div>Yearly Spending To Date: {totalSpend(this.props.spending)}</div>
           <div>
-            Monthly Spedning To Date: {monthlySpend(this.props.spending)}
+            Monthly Spending To Date: {monthlySpend(this.props.spending)}
           </div>
         </div>
       )

@@ -46,8 +46,10 @@ class AddData extends React.Component {
 
   render() {
     return (
-      <div>
-        <b>Enter Spending Here:</b>
+      <div className="container">
+        <div className="headerText">
+          <b>Enter Spending Here:</b>
+        </div>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="item:">Line Item: </label>
           <input

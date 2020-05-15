@@ -53,3 +53,29 @@ router.post('/', async (req, res, next) => {
     next(error)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const spendLogToDelete = await Spendlog.findByPk(id)
+    if (spendLogToDelete) {
+      await spendLogToDelete.destroy()
+      const currentYear = moment().format('YYYY')
+      const updatedSpendLogs = await Spendlog.findAll({
+        where: {
+          userId: req.user.id,
+          andOp: Sequelize.where(
+            Sequelize.fn('date_part', 'year', Sequelize.col('date')),
+            currentYear
+          )
+        },
+        include: {model: Category}
+      })
+      res.send(updatedSpendLogs)
+    } else {
+      res.status(404).send('Could Not Delete Spendlog')
+    }
+  } catch (error) {
+    next(error)
+  }
+})
