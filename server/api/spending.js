@@ -79,3 +79,31 @@ router.delete('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const {item, amount, date, userId, categoryId} = req.body
+    const itemToUpdate = await Spendlog.findByPk(id)
+    if (itemToUpdate) {
+      await itemToUpdate.update({item, amount, date, userId, categoryId})
+
+      const currentYear = moment().format('YYYY')
+      const updatedSpendLogs = await Spendlog.findAll({
+        where: {
+          userId: req.user.id,
+          andOp: Sequelize.where(
+            Sequelize.fn('date_part', 'year', Sequelize.col('date')),
+            currentYear
+          )
+        },
+        include: {model: Category}
+      })
+      res.send(updatedSpendLogs)
+    } else {
+      res.status(404).send('Could Not Update SpendLog')
+    }
+  } catch (error) {
+    next(error)
+  }
+})

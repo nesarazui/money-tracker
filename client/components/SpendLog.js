@@ -1,12 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchSpendLog, deleteSpendLog} from '../store/spending'
+import AddData from './AddData'
+const moment = require('moment')
 
 class SpendLog extends React.Component {
   constructor() {
     super()
+    this.state = {
+      item: '',
+      amount: 0,
+      categoryId: 1,
+      newCategory: '',
+      editingLineItem: false,
+      date: moment().format('YYYY-MM-DD')
+    }
     this.deleteSpendLog = this.deleteSpendLog.bind(this)
     this.editSpendLog = this.editSpendLog.bind(this)
+    this.resetEditStatus = this.resetEditStatus.bind(this)
   }
 
   componentDidMount() {
@@ -19,8 +30,12 @@ class SpendLog extends React.Component {
     event.preventDefault()
   }
 
-  editSpendLog(id) {
-    alert('EDITING SPEND LOG')
+  editSpendLog(log) {
+    this.setState({editingLineItem: log})
+  }
+
+  resetEditStatus() {
+    this.setState({editingLineItem: false})
   }
 
   render() {
@@ -49,7 +64,7 @@ class SpendLog extends React.Component {
                   </button>
                   <button
                     onClick={() => {
-                      this.editSpendLog(log.id)
+                      this.editSpendLog(log)
                     }}
                   >
                     Edit Details
@@ -58,6 +73,12 @@ class SpendLog extends React.Component {
               )
             })}
           </div>
+          {this.state.editingLineItem ? (
+            <AddData
+              spendLog={this.state.editingLineItem}
+              reset={this.resetEditStatus}
+            />
+          ) : null}
         </div>
       )
     } else {

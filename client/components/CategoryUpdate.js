@@ -5,15 +5,17 @@ import {
   addingCategory,
   deleteCategory
 } from '../store/spending'
+import EditCategoryName from './EditCategoryName'
 
 class CategoryUpdate extends React.Component {
   constructor() {
     super()
-    this.state = {newCategory: ''}
+    this.state = {newCategory: '', edit: false}
     this.handleChange = this.handleChange.bind(this)
     this.addCategory = this.addCategory.bind(this)
     this.deleteCategory = this.deleteCategory.bind(this)
     this.editCategory = this.editCategory.bind(this)
+    this.reset = this.reset.bind(this)
   }
 
   componentDidMount() {
@@ -36,10 +38,16 @@ class CategoryUpdate extends React.Component {
     event.preventDefault()
   }
 
-  editCategory(id) {
-    alert('EDITING CATEGORY')
+  editCategory(catItem) {
+    console.log('IN Edit Category fx,', catItem)
+    this.setState({edit: catItem})
+    console.log('from state?', this.state.edit)
+    event.preventDefault()
   }
 
+  reset() {
+    this.setState({edit: false})
+  }
   // showField() {
   //     return (
 
@@ -81,7 +89,7 @@ class CategoryUpdate extends React.Component {
               </button>
               <button
                 onClick={() => {
-                  this.editCategory(catItem.id)
+                  this.editCategory(catItem)
                 }}
               >
                 Edit
@@ -116,6 +124,9 @@ class CategoryUpdate extends React.Component {
         >
           Back
         </button>
+        {this.state.edit ? (
+          <EditCategoryName item={this.state.edit} reset={this.reset} />
+        ) : null}
       </div>
     )
   }

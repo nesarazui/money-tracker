@@ -66,6 +66,19 @@ export const deleteSpendLog = id => {
   }
 }
 
+export const updateItem = (id, updatedObj) => {
+  return async dispatch => {
+    try {
+      console.log('Reached Redux Thunk', updatedObj)
+      const {data} = await axios.put(`/api/spending/${id}`, updatedObj)
+      console.log('WE HAVE UPDATED DATA COMING BACK', data)
+      return dispatch(getSpending(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 export const fetchCategories = () => {
   return async dispatch => {
     try {
@@ -96,6 +109,18 @@ export const deleteCategory = id => {
     try {
       console.log('IN THE THUNK', id)
       const {data} = await axios.delete(`/api/categories/${id}`)
+      return dispatch(getCategories(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const updateCategory = (id, updatedObj) => {
+  return async dispatch => {
+    try {
+      console.log('DID WE REACH THE THUNK')
+      const {data} = await axios.put(`/api/categories/${id}`, updatedObj)
       return dispatch(getCategories(data))
     } catch (error) {
       console.error(error)

@@ -4,26 +4,39 @@ import {
   addSpend,
   fetchSpendLog,
   fetchCategories,
-  addingCategory
+  addingCategory,
+  updateItem
 } from '../store/spending'
 const moment = require('moment')
 
 class AddData extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       item: '',
       amount: 0,
       categoryId: 1,
       newCategory: '',
+      isUpdating: !!this.props.spendLog,
       date: moment().format('YYYY-MM-DD')
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.addCategory = this.addCategory.bind(this)
+    this.updateItemLog = this.updateItemLog.bind(this)
   }
 
   componentDidMount() {
+    if (this.props.spendLog) {
+      this.setState({
+        item: this.props.spendLog.item,
+        amount: this.props.spendLog.amount,
+        categoryId: this.props.spendLog.categoryId,
+        newCategory: '',
+        isUpdating: !!this.props.spendLog,
+        date: this.props.spendLog.date
+      })
+    }
     this.props.fetchCategories()
   }
 
@@ -44,11 +57,20 @@ class AddData extends React.Component {
     this.setState({categoryId: id})
   }
 
+  async updateItemLog(id, event) {
+    event.preventDefault(event)
+    console.log('item id,', id, 'updating item,', this.state)
+    await this.props.updateItem(id, this.state)
+    this.props.reset()
+  }
+
   render() {
     return (
       <div className="container">
         <div className="headerText">
-          <b>Enter Spending Here:</b>
+          <b>
+            {this.state.isUpdating ? 'Update Details' : 'Enter Spending Here'}:
+          </b>
         </div>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="item:">Line Item: </label>
@@ -113,8 +135,18 @@ class AddData extends React.Component {
             value={this.state.date}
             onChange={this.handleChange}
           />
-
-          <button type="submit">Add</button>
+          {this.state.isUpdating ? (
+            <button
+              type="button"
+              onClick={() => {
+                this.updateItemLog(this.props.spendLog.id, event)
+              }}
+            >
+              Update
+            </button>
+          ) : (
+            <button type="submit">Add</button>
+          )}
         </form>
       </div>
     )
@@ -130,7 +162,8 @@ const mapDispatch = dispatch => {
     fetchCategories: () => {
       dispatch(fetchCategories())
     },
-    addingCategory: newCat => dispatch(addingCategory(newCat))
+    addingCategory: newCat => dispatch(addingCategory(newCat)),
+    updateItem: (id, updatedObj) => dispatch(updateItem(id, updatedObj))
   }
 }
 
