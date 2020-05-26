@@ -3,10 +3,6 @@ import {connect} from 'react-redux'
 import {totalSpend, monthlySpend} from '../utility'
 
 class Dashboard extends React.Component {
-  // componentDidMount() {
-  //   this.props.fetchSpendLog()
-  // }
-
   render() {
     if (this.props.spending) {
       return (

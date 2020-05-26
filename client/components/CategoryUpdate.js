@@ -33,15 +33,12 @@ class CategoryUpdate extends React.Component {
   }
 
   async deleteCategory(id) {
-    console.log('WHAT IS THE ID', id)
     await this.props.deleteCategory(id)
     event.preventDefault()
   }
 
   editCategory(catItem) {
-    console.log('IN Edit Category fx,', catItem)
     this.setState({edit: catItem})
-    console.log('from state?', this.state.edit)
     event.preventDefault()
   }
 
@@ -76,7 +73,6 @@ class CategoryUpdate extends React.Component {
       <div>
         <b>Customize Your Categories</b>
         {this.props.categories.map(catItem => {
-          console.log('****', catItem)
           return (
             <div key={catItem.id}>
               {catItem.categoryType}

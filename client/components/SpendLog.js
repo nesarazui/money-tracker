@@ -25,7 +25,6 @@ class SpendLog extends React.Component {
   }
 
   async deleteSpendLog(id) {
-    console.log('WHAT IS THE ID', id)
     await this.props.deleteSpendLog(id)
     event.preventDefault()
   }
@@ -39,16 +38,14 @@ class SpendLog extends React.Component {
   }
 
   render() {
-    //console.log('HERE ARE ALL THE SPEND LOGS FOR CODY AFTER RENDER: ', this.props.spending)
     const userLogs = this.props.spending
-    console.log('***USERLOGS', userLogs)
+
     if (userLogs.length > 0) {
       return (
         <div className="container">
           <b>View Full Log of Spending Here:</b>
           <div>
             {userLogs.map(log => {
-              console.log('THIS IS THE LOG: ', log)
               return (
                 <div className="newLine" key={log.id}>
                   <div>Line Item: {log.item}</div>

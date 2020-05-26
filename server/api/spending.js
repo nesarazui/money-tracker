@@ -8,7 +8,6 @@ const {Op} = require('sequelize')
 
 router.get('/year', async (req, res, next) => {
   try {
-    console.log('WAS THIS API/SPENDING ROUTE HIT')
     const currentYear = moment().format('YYYY')
     const spendlogs = await Spendlog.findAll({
       where: {
@@ -20,7 +19,6 @@ router.get('/year', async (req, res, next) => {
       },
       include: {model: Category}
     })
-    console.log('What does the returned spendlogs data look like: ', spendlogs)
     if (spendlogs) {
       res.json(spendlogs)
     } else {
@@ -42,13 +40,11 @@ router.post('/', async (req, res, next) => {
       userId,
       date
     })
-    console.log('REQ BODY IS: ', req.body)
     if (newObj) {
       res.status(201).send(newObj)
     } else {
       res.status(401).send('Could not save new spend item')
     }
-    console.log('???', newObj)
   } catch (error) {
     next(error)
   }

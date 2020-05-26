@@ -51,7 +51,6 @@ class AddData extends React.Component {
   }
 
   async addCategory(newCat) {
-    console.log('what is the newCat', newCat)
     await this.props.addingCategory(newCat)
     let id = this.props.categories[this.props.categories.length - 1].id
     this.setState({categoryId: id})
@@ -59,7 +58,6 @@ class AddData extends React.Component {
 
   async updateItemLog(id, event) {
     event.preventDefault(event)
-    console.log('item id,', id, 'updating item,', this.state)
     await this.props.updateItem(id, this.state)
     this.props.reset()
   }
@@ -82,8 +80,6 @@ class AddData extends React.Component {
           />
 
           <label htmlFor="amount:">Amount: </label>
-          {/* <input name="amount" type="number" min="0.00" max="10000.00" step="0.01" 
-            value={this.state.amount} onChange={this.handleChange} /> */}
           <input
             name="amount"
             type="number"

@@ -11,7 +11,6 @@ class EditCategoryName extends React.Component {
   }
 
   componentDidMount() {
-    console.log('>???', this.props.item)
     this.setState({name: this.props.item.categoryType})
   }
 
@@ -21,7 +20,6 @@ class EditCategoryName extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    console.log('did we get here,', this.props.item.id, this.state)
     await this.props.updateCategory(this.props.item.id, this.state)
 
     this.props.reset()

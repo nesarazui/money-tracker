@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Dashboard from './Dashboard'
 import AddData from './AddData'
 import SpendLog from './SpendLog'
+import Budget from './Budget'
 import {Link} from 'react-router-dom'
 
 /**
@@ -16,6 +17,7 @@ export const UserHome = props => {
     <div>
       <h3>Welcome, {email}</h3>
       <Dashboard />
+      <Budget />
       <AddData />
       <div className="container">
         <Link to="/CategoryUpdate">

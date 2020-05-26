@@ -3,6 +3,7 @@
 const db = require('../server/db')
 const {User} = require('../server/db/models')
 const {Spendlog} = require('../server/db/models')
+const {Budget} = require('../server/db/models')
 const {Category} = require('../server/db/models')
 
 async function seed() {
@@ -71,6 +72,29 @@ async function seed() {
     }),
     Spendlog.create({
       item: 'car insurance',
+      amount: 100,
+      userId: 1,
+      categoryId: 4
+    })
+  ])
+
+  const budget = await Promise.all([
+    Budget.create({
+      amount: 100,
+      userId: 1,
+      categoryId: 1
+    }),
+    Budget.create({
+      amount: 300,
+      userId: 1,
+      categoryId: 2
+    }),
+    Budget.create({
+      amount: 500,
+      userId: 1,
+      categoryId: 3
+    }),
+    Budget.create({
       amount: 100,
       userId: 1,
       categoryId: 4
