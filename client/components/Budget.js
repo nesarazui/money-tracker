@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchingBudget} from '../store/budget'
 import {totalSpend} from '../utility'
 import UpdateBudget from './UpdateBudget'
+import {Link} from 'react-router-dom'
 
 class Budget extends React.Component {
   constructor() {
@@ -56,6 +57,10 @@ class Budget extends React.Component {
         <p>
           You have budgeted <b>${totalSpend(this.props.budget)}</b> per month.
         </p>
+
+        <Link to="/CategoryUpdate">
+          <b>Add More Categories</b>
+        </Link>
       </div>
     )
   }

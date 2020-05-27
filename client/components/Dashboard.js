@@ -1,20 +1,51 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {totalSpend, monthlySpend} from '../utility'
+import {fetchingBudget} from '../store/budget'
+import {totalSpend, monthlySpend, monthlyDifference} from '../utility'
 
 class Dashboard extends React.Component {
+  constructor() {
+    super()
+  }
+
+  // componentDidMount () {
+  //   this.props.fetchingBudget()
+
+  //   let monthSpend = totalSpend(this.props.spending)
+  //   let yearSpend = monthlySpend(this.props.spending)
+  //   let monthlyBudget = totalSpend(this.props.budget)
+  //   this.setState({monthlySpend: monthSpend, yearlySpend: yearSpend, monthlyBudget: monthlyBudget})
+  // }
+
   render() {
-    if (this.props.spending) {
+    let monthlyActual = monthlySpend(this.props.spending)
+    let yearlyActual = totalSpend(this.props.spending)
+    let monthlyBudget = totalSpend(this.props.budget)
+    let monthDifference = monthlyDifference(monthlyActual, monthlyBudget)
+    console.log('???', this.props.budget)
+    if (this.props.spending && this.props.budget.length > 0) {
       return (
         <div className="container">
           <div className="headerText">
             <b>At A Glance:</b>
           </div>
 
-          <div>Yearly Spending To Date: {totalSpend(this.props.spending)}</div>
-          <div>
-            Monthly Spending To Date: {monthlySpend(this.props.spending)}
-          </div>
+          <div>Yearly Spending To Date: {yearlyActual}</div>
+          <div>Monthly Spending To Date: {monthlyActual}</div>
+
+          <div>Your Monthly Budget is: {monthlyBudget}</div>
+          {monthDifference > 0 ? (
+            <div>
+              You Are Under Your Monthly Budget By ${monthDifference}. Keep It
+              Up!
+            </div>
+          ) : (
+            <div>
+              Warning: You Are Over Your Monthly Budget By ${Math.abs(
+                monthDifference
+              )}.
+            </div>
+          )}
         </div>
       )
     } else {
@@ -25,9 +56,18 @@ class Dashboard extends React.Component {
 
 const mapState = state => {
   return {
-    spending: state.spending.spending
+    spending: state.spending.spending,
+    budget: state.budget.budget
   }
 }
 
-const connectedToDashboard = connect(mapState, null)(Dashboard)
+const mapDispatch = dispatch => {
+  return {
+    fetchingBudget: () => {
+      dispatch(fetchingBudget())
+    }
+  }
+}
+
+const connectedToDashboard = connect(mapState, mapDispatch)(Dashboard)
 export default connectedToDashboard

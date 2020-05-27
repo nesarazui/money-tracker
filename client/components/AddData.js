@@ -48,6 +48,14 @@ class AddData extends React.Component {
     event.preventDefault()
     await this.props.addSpend(this.state)
     await this.props.fetchSpendLog()
+    this.setState({
+      item: '',
+      amount: 0,
+      categoryId: 1,
+      newCategory: '',
+      isUpdating: !!this.props.spendLog,
+      date: moment().format('YYYY-MM-DD')
+    })
   }
 
   async addCategory(newCat) {

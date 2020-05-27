@@ -5,6 +5,10 @@ const Category = db.define('category', {
   categoryType: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  userId: {
+    type: Sequelize.INTEGER,
+    defaultValue: null
   }
 })
 

@@ -90,9 +90,7 @@ export const fetchCategories = () => {
 export const addingCategory = newCat => {
   return async dispatch => {
     try {
-      const {data} = await axios.post('/api/categories/', {
-        categoryType: newCat
-      })
+      const {data} = await axios.post('/api/categories/', newCat)
       return dispatch(getCategories(data))
     } catch (error) {
       console.error(error)

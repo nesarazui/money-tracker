@@ -1,10 +1,15 @@
 const router = require('express').Router()
-const {Category, Spendlog} = require('../db/models')
+const {Category, Spendlog, Budget} = require('../db/models')
+const {Op} = require('sequelize')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const categoriesById = await Category.findAll()
+    const categoriesById = await Category.findAll({
+      where: {
+        [Op.or]: [{userId: null}, {userId: req.user.id}]
+      }
+    })
     if (categoriesById) {
       res.send(categoriesById)
     } else {
@@ -17,7 +22,19 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newCat = await Category.create(req.body)
+    const {newCategory, amount} = req.body
+    const newCat = await Category.create({
+      categoryType: newCategory,
+      userId: req.user.id
+    })
+    let categoryId = newCat.id
+
+    //adds budget for user's new category in Budget table
+    await Budget.create({
+      amount,
+      userId: req.user.id,
+      categoryId
+    })
     if (newCat) {
       const updatedCategories = await Category.findAll()
       res.send(updatedCategories)

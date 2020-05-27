@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const Budget = require('../db/models/budget')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -23,6 +24,27 @@ router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body)
     req.login(user, err => (err ? next(err) : res.json(user)))
+
+    await Budget.create({
+      amount: 500,
+      userId: req.user.id,
+      categoryId: 1
+    })
+    await Budget.create({
+      amount: 500,
+      userId: req.user.id,
+      categoryId: 2
+    })
+    await Budget.create({
+      amount: 500,
+      userId: req.user.id,
+      categoryId: 3
+    })
+    await Budget.create({
+      amount: 500,
+      userId: req.user.id,
+      categoryId: 4
+    })
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')

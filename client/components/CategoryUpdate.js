@@ -10,7 +10,7 @@ import EditCategoryName from './EditCategoryName'
 class CategoryUpdate extends React.Component {
   constructor() {
     super()
-    this.state = {newCategory: '', edit: false}
+    this.state = {newCategory: '', amount: 0, edit: false}
     this.handleChange = this.handleChange.bind(this)
     this.addCategory = this.addCategory.bind(this)
     this.deleteCategory = this.deleteCategory.bind(this)
@@ -29,7 +29,7 @@ class CategoryUpdate extends React.Component {
   async addCategory(newCat) {
     await this.props.addingCategory(newCat)
     event.preventDefault()
-    this.setState({newCategory: ''})
+    this.setState({newCategory: '', amount: 0})
   }
 
   async deleteCategory(id) {
@@ -45,28 +45,6 @@ class CategoryUpdate extends React.Component {
   reset() {
     this.setState({edit: false})
   }
-  // showField() {
-  //     return (
-
-  //         <form>
-  //             <label htmlFor="newCategory:">New Category:</label>
-  //             <input
-  //             name="newCategory"
-  //             type="text"
-  //             value={this.state.newCategory}
-  //             onChange={this.handleChange}
-  //             />
-  //             <button
-  //             type="button"
-  //             onClick={() => {
-  //               this.addCategory(this.state.newCategory)
-  //             }}>
-  //             Update
-  //             </button>
-  //          </form>
-
-  //     )
-  // }
 
   render() {
     return (
@@ -76,20 +54,28 @@ class CategoryUpdate extends React.Component {
           return (
             <div key={catItem.id}>
               {catItem.categoryType}
-              <button
-                onClick={() => {
-                  this.deleteCategory(catItem.id)
-                }}
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => {
-                  this.editCategory(catItem)
-                }}
-              >
-                Edit
-              </button>
+
+              <div>
+                {catItem.id > 4 ? (
+                  <div>
+                    <button
+                      onClick={() => {
+                        this.deleteCategory(catItem.id)
+                      }}
+                    >
+                      Delete
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        this.editCategory(catItem)
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                ) : null}
+              </div>
             </div>
           )
         })}
@@ -103,10 +89,17 @@ class CategoryUpdate extends React.Component {
               value={this.state.newCategory}
               onChange={this.handleChange}
             />
+            <label htmlFor="amount:">Budget For New Category:</label>
+            <input
+              name="amount"
+              type="number"
+              value={this.state.amount}
+              onChange={this.handleChange}
+            />
             <button
               type="button"
               onClick={() => {
-                this.addCategory(this.state.newCategory)
+                this.addCategory(this.state)
               }}
             >
               Add
