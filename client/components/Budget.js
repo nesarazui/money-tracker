@@ -27,10 +27,11 @@ class Budget extends React.Component {
   }
 
   render() {
+    console.log('!!!!', this.props.budget)
     return (
-      <div className="container">
-        <div className="headerText">
-          <b>Your Current Monthly Budget</b>
+      <div className="border rounded p-3 mb-2 bg-info text-white">
+        <div className="text-uppercase">
+          <b>Monthly Budget:</b>
         </div>
         {this.props.budget.map(item => {
           return (
@@ -61,6 +62,15 @@ class Budget extends React.Component {
         <Link to="/CategoryUpdate">
           <b>Add More Categories</b>
         </Link>
+        {/* <div>
+        <button
+          onClick={() => {
+            this.props.history.goBack()
+          }}
+        >
+          Back
+        </button>
+        </div> */}
       </div>
     )
   }

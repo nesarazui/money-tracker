@@ -48,12 +48,16 @@ class CategoryUpdate extends React.Component {
 
   render() {
     return (
-      <div>
-        <b>Customize Your Categories</b>
+      <div className="border rounded p-3 mb-2 bg-info text-white">
+        <div className="text-uppercase">
+          <b>Customize Your Categories</b>
+        </div>
         {this.props.categories.map(catItem => {
           return (
-            <div key={catItem.id}>
-              {catItem.categoryType}
+            <ul className="list-group" key={catItem.id}>
+              <li className="list-group-item list-group-item-primary">
+                {catItem.categoryType}
+              </li>
 
               <div>
                 {catItem.id > 4 ? (
@@ -76,7 +80,7 @@ class CategoryUpdate extends React.Component {
                   </div>
                 ) : null}
               </div>
-            </div>
+            </ul>
           )
         })}
         {/* <button onClick={this.showField}>New Category</button> */}

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Budget, SpendLog} from './components'
+import {Login, Signup, UserHome, Budget, SpendLog, AddData} from './components'
 import CategoryUpdate from './components/CategoryUpdate'
 import {me} from './store'
 
@@ -28,6 +28,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/budget" component={Budget} />
+            <Route path="/addspending" component={AddData} />
             <Route path="/spendlog" component={SpendLog} />
           </Switch>
         )}

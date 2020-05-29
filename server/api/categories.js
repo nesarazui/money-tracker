@@ -51,6 +51,11 @@ router.delete('/:id', async (req, res, next) => {
     const id = req.params.id
     const catToDelete = await Category.findByPk(id)
     if (catToDelete) {
+      const budgetLineItemToDelete = await Budget.findAll({
+        where: {userId: req.user.id, categoryId: id}
+      })
+      console.log('????', budgetLineItemToDelete)
+
       await catToDelete.destroy()
       const updatedCategories = await Category.findAll()
       res.send(updatedCategories)

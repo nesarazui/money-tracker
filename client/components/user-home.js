@@ -2,9 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Dashboard from './Dashboard'
+import {BudgetWindow} from './BudgetWindow'
+import {AddDataWindow} from './AddDataWindow'
+import {SpendLogWindow} from './SpendLogWindow'
+import Budget from './Budget'
 import AddData from './AddData'
 import SpendLog from './SpendLog'
-import Budget from './Budget'
 
 /**
  * COMPONENT
@@ -15,11 +18,19 @@ export const UserHome = props => {
   return (
     <div>
       <h3>Welcome, {email}</h3>
-      <Budget />
-      <Dashboard />
-
+      <div className="row">
+        <div className="col-md-6">
+          <Dashboard />
+          <Budget />
+          <AddData />
+        </div>
+        <div className="col-md-6">
+          <SpendLog />
+        </div>
+      </div>
+      {/* <Budget />
       <AddData />
-      <SpendLog />
+      <SpendLog /> */}
     </div>
   )
 }

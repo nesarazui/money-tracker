@@ -72,73 +72,89 @@ class AddData extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="headerText">
+      <div className="border rounded p-3 mb-2 bg-info text-white">
+        <div className="text-uppercase">
           <b>
             {this.state.isUpdating ? 'Update Details' : 'Enter Spending Here'}:
           </b>
         </div>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="item:">Line Item: </label>
-          <input
-            name="item"
-            type="text"
-            value={this.state.item}
-            onChange={this.handleChange}
-          />
+          <div className="form-group">
+            <label htmlFor="item:">Line Item: </label>
+            <input
+              className="form-control"
+              id="formGroupExampleInput"
+              name="item"
+              type="text"
+              value={this.state.item}
+              onChange={this.handleChange}
+            />
+          </div>
 
-          <label htmlFor="amount:">Amount: </label>
-          <input
-            name="amount"
-            type="number"
-            placeholder="Enter Amount"
-            value={this.state.amount}
-            onChange={this.handleChange}
-          />
+          <div className="form-group">
+            <label htmlFor="amount:">Amount: </label>
+            <input
+              className="form-control"
+              id="formGroupExampleInput"
+              name="amount"
+              type="number"
+              placeholder="Enter Amount"
+              value={this.state.amount}
+              onChange={this.handleChange}
+            />
+          </div>
 
-          <label htmlFor="categoryId:">Category: </label>
-          <select
-            name="categoryId"
-            value={this.state.categoryId}
-            onChange={this.handleChange}
-          >
-            {this.props.categories.map(catItem => {
-              return (
-                <option key={catItem.id} value={catItem.id}>
-                  {catItem.categoryType}
-                </option>
-              )
-            })}
-            <option value="0">Create New Category</option>
-          </select>
+          <div className="form-group">
+            <label htmlFor="categoryId:">Category: </label>
+            <select
+              className="form-control"
+              name="categoryId"
+              value={this.state.categoryId}
+              onChange={this.handleChange}
+            >
+              {this.props.categories.map(catItem => {
+                return (
+                  <option key={catItem.id} value={catItem.id}>
+                    {catItem.categoryType}
+                  </option>
+                )
+              })}
+              <option value="0">Create New Category</option>
+            </select>
 
-          {this.state.categoryId === '0' ? (
-            <div>
-              <label htmlFor="newCategory:">New Category:</label>
-              <input
-                name="newCategory"
-                type="text"
-                value={this.state.newCategory}
-                onChange={this.handleChange}
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  this.addCategory(this.state.newCategory)
-                }}
-              >
-                Update
-              </button>
-            </div>
-          ) : null}
+            {this.state.categoryId === '0' ? (
+              <div>
+                <label htmlFor="newCategory:">New Category:</label>
+                <input
+                  className="form-control"
+                  name="newCategory"
+                  type="text"
+                  value={this.state.newCategory}
+                  onChange={this.handleChange}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.addCategory(this.state.newCategory)
+                  }}
+                >
+                  Update
+                </button>
+              </div>
+            ) : null}
+          </div>
 
-          <label htmlFor="date:">Date: </label>
-          <input
-            name="date"
-            type="date"
-            value={this.state.date}
-            onChange={this.handleChange}
-          />
+          <div className="form-group">
+            <label htmlFor="date:">Date: </label>
+            <input
+              className="form-control"
+              name="date"
+              type="date"
+              value={this.state.date}
+              onChange={this.handleChange}
+            />
+          </div>
+
           {this.state.isUpdating ? (
             <button
               type="button"
@@ -152,6 +168,15 @@ class AddData extends React.Component {
             <button type="submit">Add</button>
           )}
         </form>
+        {/* <div>
+        <button
+          onClick={() => {
+            this.props.history.goBack()
+          }}
+        >
+          Back
+        </button>
+        </div> */}
       </div>
     )
   }

@@ -4,18 +4,14 @@ import {fetchingBudget} from '../store/budget'
 import {totalSpend, monthlySpend, monthlyDifference} from '../utility'
 
 class Dashboard extends React.Component {
-  constructor() {
-    super()
+  componentDidMount() {
+    this.props.fetchingBudget()
+
+    //   let monthSpend = totalSpend(this.props.spending)
+    //   let yearSpend = monthlySpend(this.props.spending)
+    //   let monthlyBudget = totalSpend(this.props.budget)
+    //   this.setState({monthlySpend: monthSpend, yearlySpend: yearSpend, monthlyBudget: monthlyBudget})
   }
-
-  // componentDidMount () {
-  //   this.props.fetchingBudget()
-
-  //   let monthSpend = totalSpend(this.props.spending)
-  //   let yearSpend = monthlySpend(this.props.spending)
-  //   let monthlyBudget = totalSpend(this.props.budget)
-  //   this.setState({monthlySpend: monthSpend, yearlySpend: yearSpend, monthlyBudget: monthlyBudget})
-  // }
 
   render() {
     let monthlyActual = monthlySpend(this.props.spending)
@@ -25,8 +21,8 @@ class Dashboard extends React.Component {
     console.log('???', this.props.budget)
     if (this.props.spending && this.props.budget.length > 0) {
       return (
-        <div className="container">
-          <div className="headerText">
+        <div className="border rounded p-3 mb-2 bg-info text-white">
+          <div className="text-uppercase">
             <b>At A Glance:</b>
           </div>
 

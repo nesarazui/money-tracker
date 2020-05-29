@@ -42,8 +42,11 @@ class SpendLog extends React.Component {
 
     if (userLogs.length > 0) {
       return (
-        <div className="container">
-          <b>View Full Log of Spending Here:</b>
+        <div className="border rounded p-3 mb-2 bg-info text-white">
+          <div className="text-uppercase">
+            <b>What You've Spent On:</b>
+          </div>
+
           <div>
             {userLogs.map(log => {
               return (
@@ -76,13 +79,33 @@ class SpendLog extends React.Component {
               reset={this.resetEditStatus}
             />
           ) : null}
+          {/* <div>
+        <button
+          onClick={() => {
+            this.props.history.goBack()
+          }}
+        >
+          Back
+        </button>
+        </div> */}
         </div>
       )
     } else {
       return (
-        <div className="container">
-          <b>View Full Log of Spending Here:</b>
+        <div className="border rounded p-3 mb-2 bg-info text-white">
+          <div className="text-uppercase">
+            <b>What You've Spent On:</b>
+          </div>
           <div>No Saved Logs</div>
+          {/* <div>
+        <button
+          onClick={() => {
+            this.props.history.goBack()
+          }}
+        >
+          Back
+        </button>
+        </div> */}
         </div>
       )
     }

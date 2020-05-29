@@ -9,20 +9,40 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <h1>MONEY TRACKER</h1>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="row">
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          <Link to="/budget">Budget</Link>
-          <Link to="/spendlog">SpendLog</Link>
+          <div className="col-md-1">
+            <Link to="/home">Home</Link>
+          </div>
+
+          <div className="col-md-1">
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+
+          <div className="col-md-1">
+            <Link to="/budget">Budget</Link>
+          </div>
+
+          <div className="col-md-1">
+            <Link to="/spendlog">SpendLog</Link>
+          </div>
+
+          <div className="col-md-1">
+            <Link to="/addspending">Add Spending</Link>
+          </div>
         </div>
       ) : (
-        <div>
+        <div className="row">
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <div className="col-md-1">
+            <Link to="/login">Login</Link>
+          </div>
+
+          <div className="col-md-1">
+            <Link to="/signup">Sign Up</Link>
+          </div>
         </div>
       )}
     </nav>

@@ -30,16 +30,19 @@ class UpdateBudget extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="amount">
-            Edit Amount for {this.props.lineItem.category.categoryType}
-          </label>
-          <input
-            name="amount"
-            type="number"
-            placeholder="Enter Amount"
-            value={this.state.amount}
-            onChange={this.handleChange}
-          />
+          <div className="form-group">
+            <label htmlFor="amount">
+              Edit Amount for {this.props.lineItem.category.categoryType}
+            </label>
+            <input
+              className="control-form"
+              name="amount"
+              type="number"
+              placeholder="Enter Amount"
+              value={this.state.amount}
+              onChange={this.handleChange}
+            />
+          </div>
           <button type="submit">Submit</button>
         </form>
       </div>
