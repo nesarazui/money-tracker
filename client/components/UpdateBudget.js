@@ -43,7 +43,9 @@ class UpdateBudget extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <button type="submit">Submit</button>
+          <button className="btn btn-light btn-sm" type="submit">
+            Submit
+          </button>
         </form>
       </div>
     )

@@ -26,8 +26,9 @@ class EditCategoryName extends React.Component {
   }
 
   render() {
+    console.log('reached', this.props.item)
     return (
-      <div>
+      <div className="border rounded p-3 mb-2 bg-secondary text-white">
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name:">
             Update Name of Category '{this.props.item.categoryType}':{' '}
@@ -38,7 +39,9 @@ class EditCategoryName extends React.Component {
             value={this.state.name}
             onChange={this.handleChange}
           />
-          <button type="submit">Update</button>
+          <button className="btn btn-light btn-sm" type="submit">
+            Update
+          </button>
         </form>
       </div>
     )

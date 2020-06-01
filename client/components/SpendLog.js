@@ -84,16 +84,17 @@ class SpendLog extends React.Component {
                       this.deleteSpendLog(log.id)
                     }}
                   />
+
+                  {this.state.editingLineItem.id === log.id ? (
+                    <AddData
+                      spendLog={this.state.editingLineItem}
+                      reset={this.resetEditStatus}
+                    />
+                  ) : null}
                 </div>
               )
             })}
           </div>
-          {this.state.editingLineItem ? (
-            <AddData
-              spendLog={this.state.editingLineItem}
-              reset={this.resetEditStatus}
-            />
-          ) : null}
           {/* <div>
         <button
           onClick={() => {

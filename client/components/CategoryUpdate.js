@@ -39,6 +39,7 @@ class CategoryUpdate extends React.Component {
 
   editCategory(catItem) {
     this.setState({edit: catItem})
+    console.log('???', this.state.edit)
     event.preventDefault()
   }
 
@@ -54,37 +55,23 @@ class CategoryUpdate extends React.Component {
         </div>
         {this.props.categories.map(catItem => {
           return (
-            <ul className="list-group" key={catItem.id}>
-              <li className="list-group-item list-group-item-primary">
-                {catItem.categoryType}
-              </li>
-
-              <div>
-                {catItem.id > 4 ? (
-                  <div>
-                    {/* <button
-                      onClick={() => {
-                        this.deleteCategory(catItem.id)
-                      }}
-                    >
-                      Delete
-                    </button> */}
-
-                    <button
-                      className="btn btn-light btn-sm"
-                      onClick={() => {
-                        this.editCategory(catItem)
-                      }}
-                    >
-                      Edit
-                    </button>
-                  </div>
-                ) : null}
-              </div>
-            </ul>
+            <div key={catItem.id}>
+              {catItem.categoryType}
+              {catItem.id > 4 ? (
+                <span
+                  className="editButton oi oi-pencil"
+                  onClick={() => {
+                    this.editCategory(catItem)
+                  }}
+                />
+              ) : null}
+              {this.state.edit.id === catItem.id ? (
+                <EditCategoryName item={this.state.edit} reset={this.reset} />
+              ) : null}
+            </div>
           )
         })}
-        <div className="headerText">
+        <div className="border rounded p-3 mb-2 bg-secondary text-white">
           <form>
             <label htmlFor="newCategory:">New Category:</label>
             <input
@@ -119,9 +106,6 @@ class CategoryUpdate extends React.Component {
         >
           Back
         </button>
-        {this.state.edit ? (
-          <EditCategoryName item={this.state.edit} reset={this.reset} />
-        ) : null}
       </div>
     )
   }

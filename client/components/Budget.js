@@ -44,16 +44,15 @@ class Budget extends React.Component {
                             <label htmlFor="amount"></label>
                             <input name="amount" type="number" placeholder="Enter Amount" value={this.state.amount} onChange={this.handleChange} />
                         </form> ): null} */}
+              {this.state.lineItem.id === item.id ? (
+                <UpdateBudget
+                  lineItem={this.state.lineItem}
+                  reset={this.resetEditStatus}
+                />
+              ) : null}
             </div>
           )
         })}
-
-        {this.state.edit ? (
-          <UpdateBudget
-            lineItem={this.state.lineItem}
-            reset={this.resetEditStatus}
-          />
-        ) : null}
 
         <div className=".m-10">
           <p>
@@ -62,7 +61,7 @@ class Budget extends React.Component {
         </div>
 
         <Link to="/CategoryUpdate">
-          <b>Add More Categories</b>
+          <u className="text-white font-weight-bold">Add More Categories</u>
         </Link>
         {/* <div>
         <button
