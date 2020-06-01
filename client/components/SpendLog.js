@@ -55,20 +55,35 @@ class SpendLog extends React.Component {
                   <div>Amount: {log.amount} </div>
                   <div>Category: {log.category.categoryType}</div>
                   <div>Date: {log.date}</div>
-                  <button
+
+                  {/* <button
+                    class="btn btn-light btn-sm" 
                     onClick={() => {
                       this.deleteSpendLog(log.id)
                     }}
                   >
-                    Delete
-                  </button>
-                  <button
+                    Deleting
+                  </button> */}
+                  {/* <button
+                  class="btn btn-light btn-sm" 
                     onClick={() => {
                       this.editSpendLog(log)
                     }}
                   >
-                    Edit Details
-                  </button>
+                    Editing Details
+                  </button> */}
+                  <span
+                    className="editButton oi oi-pencil"
+                    onClick={() => {
+                      this.editSpendLog(log)
+                    }}
+                  />
+                  <span
+                    className="deleteButton oi oi-trash"
+                    onClick={() => {
+                      this.deleteSpendLog(log.id)
+                    }}
+                  />
                 </div>
               )
             })}

@@ -46,7 +46,7 @@ async function seed() {
     }),
     Spendlog.create({item: 'coffee', amount: 5, userId: 1, categoryId: 2}),
     Spendlog.create({
-      item: 'twilight',
+      item: 'movies',
       amount: 15,
       userId: 1,
       categoryId: 3
@@ -58,7 +58,7 @@ async function seed() {
       categoryId: 4
     }),
     Spendlog.create({
-      item: 'juniors cheesecake',
+      item: 'cheesecake',
       amount: 50,
       userId: 1,
       categoryId: 1

@@ -27,7 +27,6 @@ class Budget extends React.Component {
   }
 
   render() {
-    console.log('!!!!', this.props.budget)
     return (
       <div className="border rounded p-3 mb-2 bg-info text-white">
         <div className="text-uppercase">
@@ -36,10 +35,11 @@ class Budget extends React.Component {
         {this.props.budget.map(item => {
           return (
             <div key={item.id}>
+              <span
+                className="editButton oi oi-pencil"
+                onClick={() => this.updateValue(item)}
+              />
               {item.category.categoryType}: {item.amount}
-              <button type="button" onClick={() => this.updateValue(item)}>
-                Update
-              </button>
               {/* {this.state.update ? (<form>
                             <label htmlFor="amount"></label>
                             <input name="amount" type="number" placeholder="Enter Amount" value={this.state.amount} onChange={this.handleChange} />
@@ -55,9 +55,11 @@ class Budget extends React.Component {
           />
         ) : null}
 
-        <p>
-          You have budgeted <b>${totalSpend(this.props.budget)}</b> per month.
-        </p>
+        <div className=".m-10">
+          <p>
+            You have budgeted <b>${totalSpend(this.props.budget)}</b> per month.
+          </p>
+        </div>
 
         <Link to="/CategoryUpdate">
           <b>Add More Categories</b>

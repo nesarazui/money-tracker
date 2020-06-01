@@ -19,7 +19,6 @@
 //     }
 
 //     componentDidMount () {
-//         console.log('TIMBER', this.props.spendLog)
 //         this.setState(this.props.spendLog)
 //     }
 

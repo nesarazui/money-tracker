@@ -62,15 +62,16 @@ class CategoryUpdate extends React.Component {
               <div>
                 {catItem.id > 4 ? (
                   <div>
-                    <button
+                    {/* <button
                       onClick={() => {
                         this.deleteCategory(catItem.id)
                       }}
                     >
                       Delete
-                    </button>
+                    </button> */}
 
                     <button
+                      className="btn btn-light btn-sm"
                       onClick={() => {
                         this.editCategory(catItem)
                       }}
@@ -83,7 +84,6 @@ class CategoryUpdate extends React.Component {
             </ul>
           )
         })}
-        {/* <button onClick={this.showField}>New Category</button> */}
         <div className="headerText">
           <form>
             <label htmlFor="newCategory:">New Category:</label>
@@ -102,6 +102,7 @@ class CategoryUpdate extends React.Component {
             />
             <button
               type="button"
+              className="btn btn-light btn-sm"
               onClick={() => {
                 this.addCategory(this.state)
               }}
@@ -111,6 +112,7 @@ class CategoryUpdate extends React.Component {
           </form>
         </div>
         <button
+          className="btn btn-light btn-sm"
           onClick={() => {
             this.props.history.goBack()
           }}

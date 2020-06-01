@@ -18,7 +18,6 @@ class Dashboard extends React.Component {
     let yearlyActual = totalSpend(this.props.spending)
     let monthlyBudget = totalSpend(this.props.budget)
     let monthDifference = monthlyDifference(monthlyActual, monthlyBudget)
-    console.log('???', this.props.budget)
     if (this.props.spending && this.props.budget.length > 0) {
       return (
         <div className="border rounded p-3 mb-2 bg-info text-white">

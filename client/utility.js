@@ -4,7 +4,6 @@ const totalSpend = arr => {
   let sum = arr.reduce(function(accumulator, currentValue) {
     return accumulator + currentValue.amount
   }, 0)
-  console.log('SUM', arr, sum)
   return sum
 }
 
@@ -21,7 +20,6 @@ const monthlySpend = arr => {
 
 const monthlyDifference = (monthActual, monthlyBudget) => {
   const difference = monthlyBudget - monthActual
-  console.log('****', monthActual, monthlyBudget)
   return difference
 }
 export {totalSpend, monthlySpend, monthlyDifference}

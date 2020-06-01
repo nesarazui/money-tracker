@@ -158,6 +158,7 @@ class AddData extends React.Component {
           {this.state.isUpdating ? (
             <button
               type="button"
+              className="btn btn-light btn-sm"
               onClick={() => {
                 this.updateItemLog(this.props.spendLog.id, event)
               }}
@@ -165,7 +166,9 @@ class AddData extends React.Component {
               Update
             </button>
           ) : (
-            <button type="submit">Add</button>
+            <button className="btn btn-light btn-sm" type="submit">
+              Add
+            </button>
           )}
         </form>
         {/* <div>

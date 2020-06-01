@@ -26,10 +26,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </div>
 
           <div className="col-md-1">
-            <Link to="/spendlog">SpendLog</Link>
+            <Link to="/spendlog">Spending</Link>
           </div>
 
-          <div className="col-md-1">
+          <div className="col-md-2">
             <Link to="/addspending">Add Spending</Link>
           </div>
         </div>
@@ -40,7 +40,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <Link to="/login">Login</Link>
           </div>
 
-          <div className="col-md-1">
+          <div className="col-md-2">
             <Link to="/signup">Sign Up</Link>
           </div>
         </div>
