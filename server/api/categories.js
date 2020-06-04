@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Category, Spendlog, Budget} = require('../db/models')
+const {Category, Budget} = require('../db/models')
 const {Op} = require('sequelize')
 module.exports = router
 

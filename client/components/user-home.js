@@ -17,7 +17,7 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3 className="lead mt-3">Welcome to the Money Tracker, {email}</h3>
       <div className="row">
         <div className="col-md-6">
           <Dashboard />
@@ -28,9 +28,6 @@ export const UserHome = props => {
           <SpendLog />
         </div>
       </div>
-      {/* <Budget />
-      <AddData />
-      <SpendLog /> */}
     </div>
   )
 }

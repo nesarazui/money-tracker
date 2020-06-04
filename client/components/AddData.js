@@ -171,15 +171,6 @@ class AddData extends React.Component {
             </button>
           )}
         </form>
-        {/* <div>
-        <button
-          onClick={() => {
-            this.props.history.goBack()
-          }}
-        >
-          Back
-        </button>
-        </div> */}
       </div>
     )
   }

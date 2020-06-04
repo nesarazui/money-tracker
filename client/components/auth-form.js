@@ -11,7 +11,18 @@ const AuthForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <div className="border rounded p-5 mb-3 border-info">
+        <h1 className="font-weight-light text-center">The Money Tracker</h1>
+        <p className="font-weight-light text-center">
+          Money management made easy!
+        </p>
+        <p className="font-weight-light text-center">
+          {' '}
+          Create a budget, add categories, log and edit your spending, and keep
+          track of how you trend against your budget.
+        </p>
+      </div>
+      <form className="text-center" onSubmit={handleSubmit} name={name}>
         <div className="form-group">
           <label htmlFor="email">
             <small>Email</small>
@@ -25,7 +36,7 @@ const AuthForm = props => {
           <input name="password" type="password" />
         </div>
         <div className="form-group">
-          <button className="btn btn-outline-success btn-sm" type="submit">
+          <button className="btn btn-outline-info btn-sm" type="submit">
             {displayName}
           </button>
         </div>

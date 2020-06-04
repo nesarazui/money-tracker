@@ -40,10 +40,6 @@ class Budget extends React.Component {
                 onClick={() => this.updateValue(item)}
               />
               {item.category.categoryType}: {item.amount}
-              {/* {this.state.update ? (<form>
-                            <label htmlFor="amount"></label>
-                            <input name="amount" type="number" placeholder="Enter Amount" value={this.state.amount} onChange={this.handleChange} />
-                        </form> ): null} */}
               {this.state.lineItem.id === item.id ? (
                 <UpdateBudget
                   lineItem={this.state.lineItem}
@@ -63,15 +59,6 @@ class Budget extends React.Component {
         <Link to="/CategoryUpdate">
           <u className="text-white font-weight-bold">Add More Categories</u>
         </Link>
-        {/* <div>
-        <button
-          onClick={() => {
-            this.props.history.goBack()
-          }}
-        >
-          Back
-        </button>
-        </div> */}
       </div>
     )
   }

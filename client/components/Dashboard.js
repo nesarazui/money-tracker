@@ -6,11 +6,6 @@ import {totalSpend, monthlySpend, monthlyDifference} from '../utility'
 class Dashboard extends React.Component {
   componentDidMount() {
     this.props.fetchingBudget()
-
-    //   let monthSpend = totalSpend(this.props.spending)
-    //   let yearSpend = monthlySpend(this.props.spending)
-    //   let monthlyBudget = totalSpend(this.props.budget)
-    //   this.setState({monthlySpend: monthSpend, yearlySpend: yearSpend, monthlyBudget: monthlyBudget})
   }
 
   render() {
@@ -36,9 +31,8 @@ class Dashboard extends React.Component {
             </div>
           ) : (
             <div>
-              Warning: You Are Over Your Monthly Budget By ${Math.abs(
-                monthDifference
-              )}.
+              Warning: You Are Over Your Monthly Budget By $
+              {Math.abs(monthDifference)}.
             </div>
           )}
         </div>

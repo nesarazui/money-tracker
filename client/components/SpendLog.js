@@ -56,22 +56,6 @@ class SpendLog extends React.Component {
                   <div>Category: {log.category.categoryType}</div>
                   <div>Date: {log.date}</div>
 
-                  {/* <button
-                    class="btn btn-light btn-sm" 
-                    onClick={() => {
-                      this.deleteSpendLog(log.id)
-                    }}
-                  >
-                    Deleting
-                  </button> */}
-                  {/* <button
-                  class="btn btn-light btn-sm" 
-                    onClick={() => {
-                      this.editSpendLog(log)
-                    }}
-                  >
-                    Editing Details
-                  </button> */}
                   <span
                     className="editButton oi oi-pencil"
                     onClick={() => {
@@ -95,15 +79,6 @@ class SpendLog extends React.Component {
               )
             })}
           </div>
-          {/* <div>
-        <button
-          onClick={() => {
-            this.props.history.goBack()
-          }}
-        >
-          Back
-        </button>
-        </div> */}
         </div>
       )
     } else {
@@ -113,15 +88,6 @@ class SpendLog extends React.Component {
             <b>What You've Spent On:</b>
           </div>
           <div>No Saved Logs</div>
-          {/* <div>
-        <button
-          onClick={() => {
-            this.props.history.goBack()
-          }}
-        >
-          Back
-        </button>
-        </div> */}
         </div>
       )
     }
