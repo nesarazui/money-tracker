@@ -98,6 +98,17 @@ export const addingCategory = newCat => {
   }
 }
 
+export const addingCategoryFromLineItem = newCat => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/categories/newlineitem', newCat)
+      return dispatch(getCategories(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 export const deleteCategory = id => {
   return async dispatch => {
     try {

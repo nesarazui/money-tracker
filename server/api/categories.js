@@ -20,6 +20,25 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post('/newlineitem', async (req, res, next) => {
+  try {
+    const {cat} = req.body
+    const newCategoryCreated = await Category.create({
+      categoryType: cat,
+      userId: req.user.id
+    })
+
+    if (newCategoryCreated) {
+      const updatedCategories = await Category.findAll()
+      res.send(updatedCategories)
+    } else {
+      res.status(404).send('Could Not Add New Category')
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const {newCategory, amount} = req.body

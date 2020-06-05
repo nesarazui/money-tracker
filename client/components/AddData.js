@@ -4,7 +4,7 @@ import {
   addSpend,
   fetchSpendLog,
   fetchCategories,
-  addingCategory,
+  addingCategoryFromLineItem,
   updateItem
 } from '../store/spending'
 const moment = require('moment')
@@ -22,7 +22,7 @@ class AddData extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.addCategory = this.addCategory.bind(this)
+    this.addingCategoryFromLineItem = this.addingCategoryFromLineItem.bind(this)
     this.updateItemLog = this.updateItemLog.bind(this)
   }
 
@@ -58,8 +58,8 @@ class AddData extends React.Component {
     })
   }
 
-  async addCategory(newCat) {
-    await this.props.addingCategory(newCat)
+  async addingCategoryFromLineItem(newCat) {
+    await this.props.addingCategoryFromLineItem({cat: newCat})
     let id = this.props.categories[this.props.categories.length - 1].id
     this.setState({categoryId: id})
   }
@@ -135,7 +135,7 @@ class AddData extends React.Component {
                 <button
                   type="button"
                   onClick={() => {
-                    this.addCategory(this.state.newCategory)
+                    this.addingCategoryFromLineItem(this.state.newCategory)
                   }}
                 >
                   Update
@@ -185,7 +185,8 @@ const mapDispatch = dispatch => {
     fetchCategories: () => {
       dispatch(fetchCategories())
     },
-    addingCategory: newCat => dispatch(addingCategory(newCat)),
+    addingCategoryFromLineItem: newCat =>
+      dispatch(addingCategoryFromLineItem(newCat)),
     updateItem: (id, updatedObj) => dispatch(updateItem(id, updatedObj))
   }
 }
